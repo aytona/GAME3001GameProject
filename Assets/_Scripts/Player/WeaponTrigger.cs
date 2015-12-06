@@ -93,10 +93,15 @@ public class WeaponTrigger : MonoBehaviour {
         gunLine.enabled = true;
         gunLine.SetPosition(0, transform.position);
         shootRay.origin = transform.position;
-        shootRay.direction = transform.forward;
+        shootRay.direction = transform.right;
         if (Physics.Raycast(shootRay, out shootHit, range, shootableMask))
         {
-
+            EnemyHealth enemyHealth = shootHit.collider.GetComponent<EnemyHealth>();
+            if (enemyHealth != null)
+                enemyHealth.TakeDamage(_damagePerShot, shootHit.point);
+            gunLine.SetPosition(1, shootHit.point);
         }
+        else
+            gunLine.SetPosition(1, shootRay.origin + shootRay.direction * range);
     }
 }
