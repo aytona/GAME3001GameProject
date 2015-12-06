@@ -13,20 +13,43 @@ public class WeaponTrigger : MonoBehaviour {
     public GameObject defaulBullet;
     public GameObject upgradedBullet;
 
+    public int damagePerShot;
+    public float timeBetweenBullets = 0.15f;
+    public float range = 100f;
+    private float timer;
+    private Ray shootRay;
+    private RaycastHit shootHit;
+    private int shootableMask;
+    private LineRenderer gunLine;
+    private Light gunLight;
+    private float effectsDisplay = 0.2f;
+
+    void Awake()
+    {
+        shootableMask = LayerMask.GetMask("Shootable");
+        gunLine = GetComponent<LineRenderer>();
+        gunLight = GetComponent<Light>();
+    }
+
     void Update()
     {
+        timer += Time.deltaTime;
+
+        if (timer >= timeBetweenBullets * effectsDisplay)
+            DisableEffects();
+
         if (GameData._Instance.UpgradeCount == 0)
         {
             defaultShooter.SetActive(true);
             if (Input.GetKeyDown(KeyCode.Space))
-                SpawnDefaultBullet();
+                DefaultShoot();
         }
         else if (GameData._Instance.UpgradeCount == 1)
         {
             defaultShooter.SetActive(false);
             upgradedPeaShooter.SetActive(true);
             if (Input.GetKeyDown(KeyCode.Space))
-                SpawnDefaultBullet();
+                UpgradedShoot();
         }
         else if (GameData._Instance.UpgradeCount == 10)
         {
@@ -46,8 +69,34 @@ public class WeaponTrigger : MonoBehaviour {
         }
     }
 
-    void SpawnDefaultBullet()
+    void DefaultShoot()
     {
+        damagePerShot = 1;
+        Shoot(damagePerShot);
+    }
 
+    void UpgradedShoot()
+    {
+        damagePerShot = 3;
+        Shoot(damagePerShot);
+    }
+
+    void DisableEffects()
+    {
+        gunLine.enabled = false;
+        gunLight.enabled = false;
+    }
+
+    void Shoot(int _damagePerShot)
+    {
+        gunLight.enabled = true;
+        gunLine.enabled = true;
+        gunLine.SetPosition(0, transform.position);
+        shootRay.origin = transform.position;
+        shootRay.direction = transform.forward;
+        if (Physics.Raycast(shootRay, out shootHit, range, shootableMask))
+        {
+
+        }
     }
 }
