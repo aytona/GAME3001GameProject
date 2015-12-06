@@ -76,6 +76,7 @@
   <ItemGroup>
     <Compile Include="Assets\_Scripts\MISC\GameData.cs" />
     <Compile Include="Assets\_Scripts\MISC\Singleton.cs" />
+    <Compile Include="Assets\_Scripts\UI\GameMenu.cs" />
     <Compile Include="Assets\_Scripts\UI\MainMenu.cs" />
   </ItemGroup>
   <ItemGroup>
