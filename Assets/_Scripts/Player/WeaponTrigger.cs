@@ -10,26 +10,44 @@ public class WeaponTrigger : MonoBehaviour {
     public GameObject coneShooter;
     public GameObject constantShooter;
 
+    public GameObject defaulBullet;
+    public GameObject upgradedBullet;
+
     void Update()
     {
         if (GameData._Instance.UpgradeCount == 0)
         {
             defaultShooter.SetActive(true);
+            if (Input.GetKeyDown(KeyCode.Space))
+                SpawnDefaultBullet();
         }
         else if (GameData._Instance.UpgradeCount == 1)
         {
             defaultShooter.SetActive(false);
             upgradedPeaShooter.SetActive(true);
+            if (Input.GetKeyDown(KeyCode.Space))
+                SpawnDefaultBullet();
         }
         else if (GameData._Instance.UpgradeCount == 10)
         {
             upgradedPeaShooter.SetActive(false);
-            coneShooter.SetActive(true);
+            if (Input.GetKeyDown(KeyCode.Space))
+                coneShooter.SetActive(true);
+            else
+                coneShooter.SetActive(false);
         }
         else if (GameData._Instance.UpgradeCount == 100)
         {
             coneShooter.SetActive(false);
-            constantShooter.SetActive(true);
+            if (Input.GetKey(KeyCode.Space))
+                constantShooter.SetActive(true);
+            else
+                constantShooter.SetActive(false);
         }
+    }
+
+    void SpawnDefaultBullet()
+    {
+
     }
 }
