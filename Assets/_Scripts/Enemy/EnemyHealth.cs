@@ -5,9 +5,9 @@ public class EnemyHealth : MonoBehaviour {
 
 	public enum EnemyType
     {
-        Melee = 25,
-        Range = 15,
-        Boss = 80
+        Melee = 10,
+        Range = 7,
+        Boss = 25
     }
 
     private EnemyType type;
@@ -19,15 +19,26 @@ public class EnemyHealth : MonoBehaviour {
     {
         CheckType();
         capsuleCollider = GetComponent<CapsuleCollider>();
+        Debug.Log(health);
+    }
+
+    void Update()
+    {
+        Debug.Log(health);
     }
 
     public void TakeDamage(int amount, Vector3 hitPoint)
     {
+        Debug.Log(health);
         if (isDead)
             return;
         health -= amount;
         if (health <= 0)
+        {
+            isDead = true;
             Destroy(gameObject);
+        }
+
     }
 
     private void CheckType()

@@ -12,32 +12,11 @@ public class WeaponTrigger : MonoBehaviour {
 
     public GameObject defaulBullet;
     public GameObject upgradedBullet;
-
-    public int damagePerShot;
-    public float timeBetweenBullets = 0.15f;
-    public float range = 100f;
-    private float timer;
-    private Ray shootRay;
-    private RaycastHit shootHit;
-    private int shootableMask;
-    private LineRenderer gunLine;
-    private Light gunLight;
-    private float effectsDisplay = 0.2f;
-
-    void Awake()
-    {
-        shootableMask = LayerMask.GetMask("Shootable");
-        gunLine = GetComponent<LineRenderer>();
-        gunLight = GetComponent<Light>();
-    }
+    public Transform defaultSpawner;
+    public Transform upgradedSpawner;
 
     void Update()
     {
-        timer += Time.deltaTime;
-
-        if (timer >= timeBetweenBullets * effectsDisplay)
-            DisableEffects();
-
         if (GameData._Instance.UpgradeCount == 0)
         {
             defaultShooter.SetActive(true);
@@ -71,37 +50,13 @@ public class WeaponTrigger : MonoBehaviour {
 
     void DefaultShoot()
     {
-        damagePerShot = 1;
-        Shoot(damagePerShot);
+        GameObject _defaultBullet = Instantiate(defaulBullet) as GameObject;
+        _defaultBullet.transform.position = defaultSpawner.transform.position;
     }
 
     void UpgradedShoot()
     {
-        damagePerShot = 3;
-        Shoot(damagePerShot);
-    }
-
-    void DisableEffects()
-    {
-        gunLine.enabled = false;
-        gunLight.enabled = false;
-    }
-
-    void Shoot(int _damagePerShot)
-    {
-        gunLight.enabled = true;
-        gunLine.enabled = true;
-        gunLine.SetPosition(0, transform.position);
-        shootRay.origin = transform.position;
-        shootRay.direction = transform.right;
-        if (Physics.Raycast(shootRay, out shootHit, range, shootableMask))
-        {
-            EnemyHealth enemyHealth = shootHit.collider.GetComponent<EnemyHealth>();
-            if (enemyHealth != null)
-                enemyHealth.TakeDamage(_damagePerShot, shootHit.point);
-            gunLine.SetPosition(1, shootHit.point);
-        }
-        else
-            gunLine.SetPosition(1, shootRay.origin + shootRay.direction * range);
+        GameObject _defaultBullet = Instantiate(upgradedBullet) as GameObject;
+        _defaultBullet.transform.position = upgradedSpawner.transform.position;
     }
 }
