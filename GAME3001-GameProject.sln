@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2015
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GAME3001-GameProject.CSharp.Plugins", "GAME3001-GameProject.CSharp.Plugins.csproj", "{558BD62A-0E85-6335-EE46-CB326C47794E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GAME3001-GameProject.CSharp", "GAME3001-GameProject.CSharp.csproj", "{9486DE8A-21BF-EC2D-E04A-A34A106E20D1}"
