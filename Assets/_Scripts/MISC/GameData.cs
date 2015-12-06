@@ -4,7 +4,7 @@ public class GameData : Singleton<GameData> {
     private int score = 0;
     private int coins = 0;
     private int waveCount = 0;
-    private int upgradeCount = 0;
+    private int upgradeCount;
     private int health = 100;
 
     private void OnLevelWasLoaded(int level)

@@ -81,7 +81,7 @@ public class GameMenu : MonoBehaviour {
     {
         if (GameData._Instance.Coins >= 250)
         {
-            GameData._Instance.UpgradeCount = 2;
+            GameData._Instance.UpgradeCount = 10;
             GameData._Instance.Coins -= 250;
             SecondUpgradeText.text = "Upgraded";
             GameObject upgradeButton = GameObject.Find("SecondUpgrade");
@@ -93,7 +93,7 @@ public class GameMenu : MonoBehaviour {
     {
         if (GameData._Instance.Coins >= 500)
         {
-            GameData._Instance.UpgradeCount = 3;
+            GameData._Instance.UpgradeCount = 100;
             GameData._Instance.Coins -= 500;
             ThirdUpgradeText.text = "Upgraded";
             GameObject upgradeButton = GameObject.Find("ThirdUpgrade");
