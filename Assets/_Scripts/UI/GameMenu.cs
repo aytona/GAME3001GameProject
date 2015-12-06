@@ -7,6 +7,9 @@ public class GameMenu : MonoBehaviour {
     public Text Score;
     public Text Coins;
     public Text Health;
+    public Text FirstUpgradeText;
+    public Text SecondUpgradeText;
+    public Text ThirdUpgradeText;
     public GameObject PauseMenu;
     public GameObject UpgradeMenu;
     public GameObject PersistantPause;
@@ -15,6 +18,10 @@ public class GameMenu : MonoBehaviour {
 
     void Update()
     {
+        Score.text = "Score: " + GameData._Instance.Score.ToString();
+        Coins.text = "Coins: " + GameData._Instance.Coins.ToString();
+        Health.text = "Health: " + GameData._Instance.Health.ToString();
+
         if (Input.GetKeyDown(KeyCode.Escape))
             paused = !paused;
         if (paused)
@@ -54,5 +61,41 @@ public class GameMenu : MonoBehaviour {
     public void doQuit()
     {
         Application.Quit();
+    }
+
+    public void doUpgrade1()
+    {
+        if (GameData._Instance.Coins >= 100)
+        {
+            GameData._Instance.UpgradeCount = 1;
+            GameData._Instance.Coins -= 100;
+            FirstUpgradeText.text = "Upgraded";
+            GameObject upgradeButton = GameObject.Find("FirstUpgrade");
+            upgradeButton.GetComponent<Button>().interactable = false;
+        }
+    }
+
+    public void doUpgrade2()
+    {
+        if (GameData._Instance.Coins >= 250)
+        {
+            GameData._Instance.UpgradeCount = 2;
+            GameData._Instance.Coins -= 250;
+            SecondUpgradeText.text = "Upgraded";
+            GameObject upgradeButton = GameObject.Find("SecondUpgrade");
+            upgradeButton.GetComponent<Button>().interactable = false;
+        }
+    }
+
+    public void doUpgrade3()
+    {
+        if (GameData._Instance.Coins >= 500)
+        {
+            GameData._Instance.UpgradeCount = 3;
+            GameData._Instance.Coins -= 500;
+            ThirdUpgradeText.text = "Upgraded";
+            GameObject upgradeButton = GameObject.Find("ThirdUpgrade");
+            upgradeButton.GetComponent<Button>().interactable = false;
+        }
     }
 }

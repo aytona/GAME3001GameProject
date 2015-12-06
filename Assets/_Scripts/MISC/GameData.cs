@@ -4,6 +4,7 @@ public class GameData : Singleton<GameData> {
     private int score = 0;
     private int coins = 0;
     private int waveCount = 0;
+    private int upgradeCount = 0;
     private int health = 100;
 
     public int Score
@@ -28,5 +29,11 @@ public class GameData : Singleton<GameData> {
     {
         get { return health; }
         set { health = value; }
+    }
+
+    public int UpgradeCount
+    {
+        get { return upgradeCount; }
+        set { upgradeCount = value; }
     }
 }
