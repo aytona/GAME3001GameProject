@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
 
 public class GameMenu : MonoBehaviour {
 
@@ -34,6 +33,9 @@ public class GameMenu : MonoBehaviour {
             PersistantPause.SetActive(false);
             Time.timeScale = 1;
         }
+
+        if (GameData._Instance.Health <= 0)
+            Application.LoadLevel(0);
     }
 
     public void doResume()
@@ -96,6 +98,23 @@ public class GameMenu : MonoBehaviour {
             ThirdUpgradeText.text = "Upgraded";
             GameObject upgradeButton = GameObject.Find("ThirdUpgrade");
             upgradeButton.GetComponent<Button>().interactable = false;
+        }
+    }
+
+    public void doHeal()
+    {
+        if (GameData._Instance.Coins >= 50)
+        {
+            if (GameData._Instance.Health + 25 <= 100)
+            {
+                GameData._Instance.Health += 25;
+                GameData._Instance.Coins -= 50;
+            }
+            else
+            {
+                GameData._Instance.Health = 100;
+                GameData._Instance.Coins -= 50;
+            }
         }
     }
 }

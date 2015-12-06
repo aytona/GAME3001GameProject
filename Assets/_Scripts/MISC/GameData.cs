@@ -7,6 +7,19 @@ public class GameData : Singleton<GameData> {
     private int upgradeCount = 0;
     private int health = 100;
 
+    private void OnLevelWasLoaded(int level)
+    {
+        // Set defaults whenever any scene is loaded
+        if (level == 0 || level == 1)
+        {
+            score = 0;
+            coins = 0;
+            waveCount = 0;
+            upgradeCount = 0;
+            health = 100;
+        }
+    }
+
     public int Score
     {
         get { return score; }
