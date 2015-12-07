@@ -31,12 +31,14 @@ public class EnemySpawner : MonoBehaviour {
         {
             for (int i = 0; i < enemyCount; i++)
             {
+                enemyCount *= GameData._Instance.WaveCount;
                 Vector3 spawnPosition = new Vector3(spawnLocation.x, spawnLocation.y, Random.Range(-spawnLocation.z, spawnLocation.z)-20);
                 Quaternion spawnRotation = Quaternion.identity;
                 Instantiate(enemy, spawnPosition, spawnRotation);
                 yield return new WaitForSeconds(spawnWait);
             }
             yield return new WaitForSeconds(waveWait);
+            GameData._Instance.WaveCount++;
             if (player == null)
                 break;
         }

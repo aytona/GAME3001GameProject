@@ -3,7 +3,7 @@
 public class GameData : Singleton<GameData> {
     private int score = 0;
     private int coins = 1000;
-    private int waveCount = 0;
+    private int waveCount = 1;
     private int upgradeCount;
     private int health = 100;
 
@@ -14,7 +14,7 @@ public class GameData : Singleton<GameData> {
         {
             score = 0;
             coins = 0;
-            waveCount = 0;
+            waveCount = 1;
             upgradeCount = 0;
             health = 100;
         }
