@@ -117,4 +117,9 @@ public class GameMenu : MonoBehaviour {
             }
         }
     }
+
+    public void doCheat()
+    {
+        GameData._Instance.Coins += 500;
+    }
 }

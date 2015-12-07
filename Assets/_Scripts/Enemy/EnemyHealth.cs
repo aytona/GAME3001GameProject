@@ -25,14 +25,34 @@ public class EnemyHealth : MonoBehaviour {
         {
             GameData._Instance.Coins += (int)type;
             GameData._Instance.Score += (int)type;
-            Destroy(gameObject);
+            Destroy(transform.parent.gameObject);
         }
     }
 
-    void OnTriggerEnter (Collider other)
+    void OnTriggerEnter(Collider other)
     {
         if (other.tag == "DefaultBullet")
+        {
             Destroy(other.gameObject);
+            health -= 1;
+        }
+        if (other.tag == "UpgradedBullet")
+        {
+            Destroy(other.gameObject);
+            health -= 5;
+        }
+        if (other.tag == "ConeBullet")
+        {
+            health -= 10;
+        }
+    }
+
+    void OnTriggerStay(Collider other)
+    {
+        if (other.tag == "ConstantBullet")
+        {
+            health -= 15;
+        }
     }
 
     private void CheckType()
