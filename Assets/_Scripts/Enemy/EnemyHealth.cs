@@ -12,33 +12,27 @@ public class EnemyHealth : MonoBehaviour {
 
     private EnemyType type;
     private int health;
-    private CapsuleCollider capsuleCollider;
-    bool isDead;
 
     void Awake()
     {
         CheckType();
-        capsuleCollider = GetComponent<CapsuleCollider>();
-        Debug.Log(health);
     }
 
     void Update()
     {
-        Debug.Log(health);
-    }
 
-    public void TakeDamage(int amount, Vector3 hitPoint)
-    {
-        Debug.Log(health);
-        if (isDead)
-            return;
-        health -= amount;
         if (health <= 0)
         {
-            isDead = true;
+            GameData._Instance.Coins += (int)type;
+            GameData._Instance.Score += (int)type;
             Destroy(gameObject);
         }
+    }
 
+    void OnTriggerEnter (Collider other)
+    {
+        if (other.tag == "DefaultBullet")
+            Destroy(other.gameObject);
     }
 
     private void CheckType()
