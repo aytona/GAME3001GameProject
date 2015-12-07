@@ -75,6 +75,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\_Scripts\Enemy\EnemyHealth.cs" />
+    <Compile Include="Assets\_Scripts\Enemy\EnemySpawner.cs" />
     <Compile Include="Assets\_Scripts\Enemy\NavScriptArrive.cs" />
     <Compile Include="Assets\_Scripts\MISC\GameData.cs" />
     <Compile Include="Assets\_Scripts\MISC\Singleton.cs" />
