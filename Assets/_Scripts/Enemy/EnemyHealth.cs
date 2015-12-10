@@ -5,9 +5,9 @@ public class EnemyHealth : MonoBehaviour {
 
 	public enum EnemyType
     {
-        Melee = 10,
-        Range = 7,
-        Boss = 25
+        Melee = 7,
+        Boss = 25,
+        Range = 4
     }
 
     private EnemyType type;
@@ -34,12 +34,12 @@ public class EnemyHealth : MonoBehaviour {
         if (other.tag == "DefaultBullet")
         {
             Destroy(other.gameObject);
-            health -= 1;
+            health -= 2;
         }
         if (other.tag == "UpgradedBullet")
         {
             Destroy(other.gameObject);
-            health -= 5;
+            health -= 4;
         }
         if (other.tag == "ConeBullet")
         {
@@ -51,7 +51,7 @@ public class EnemyHealth : MonoBehaviour {
     {
         if (other.tag == "ConstantBullet")
         {
-            health -= 15;
+            health -= 5;
         }
     }
 
