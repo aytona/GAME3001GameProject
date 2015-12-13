@@ -47,11 +47,6 @@ public class NavScriptArrive : MonoBehaviour {
         }
     }
 
-    public float GetRemainingDistance()
-    {
-        return agent.remainingDistance;
-    }
-
     private IEnumerator Attack(float fireRate)
     {
         while (true)
