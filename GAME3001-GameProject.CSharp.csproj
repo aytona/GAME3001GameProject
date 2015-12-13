@@ -77,7 +77,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\BagIdea\GUIScript.cs" />
     <Compile Include="Assets\_Scripts\Enemy\EnemyHealth.cs" />
     <Compile Include="Assets\_Scripts\Enemy\EnemySpawner.cs" />
     <Compile Include="Assets\_Scripts\Enemy\NavScriptArrive.cs" />

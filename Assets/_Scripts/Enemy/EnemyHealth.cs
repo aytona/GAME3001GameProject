@@ -17,10 +17,12 @@ public class EnemyHealth : MonoBehaviour {
     private int health;
     private bool dead = false;
     private NavScriptArrive navScript;
+    private BoxCollider boxCollider;
 
     void Awake()
     {
         CheckType();
+        boxCollider = GetComponent<BoxCollider>();
         anim = animObject.GetComponent<Animation>();
         navScript = GetComponentInParent<NavScriptArrive>();
     }
@@ -34,6 +36,7 @@ public class EnemyHealth : MonoBehaviour {
             dead = true;
             anim.Play("Death", PlayMode.StopSameLayer);
             navScript.agent.Stop();
+            boxCollider.enabled = false;
             Destroy(transform.parent.gameObject, anim.GetClip("Death").length);
         }
     }
