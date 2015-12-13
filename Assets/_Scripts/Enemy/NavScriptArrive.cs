@@ -4,14 +4,18 @@ using System.Collections;
 public class NavScriptArrive : MonoBehaviour {
 
     public Transform target;
+    public NavMeshAgent agent;
 
-    private NavMeshAgent agent;
     private bool startAttack = false;
     private float fireRate;
+    private EnemyHealth enemyHealth;
+    private Animation anim;
 
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        enemyHealth = GetComponentInChildren<EnemyHealth>();
+        anim = GetComponentInChildren<Animation>();
         if (gameObject.tag == "Melee")
         {
             target.position = new Vector3(6.5f, 1f, Random.Range(-3.3f, -31f));
@@ -37,9 +41,15 @@ public class NavScriptArrive : MonoBehaviour {
             if (!startAttack)
             {
                 startAttack = true;
+                anim.Play("Idle");
                 StartCoroutine(Attack(fireRate));
             }
         }
+    }
+
+    public float GetRemainingDistance()
+    {
+        return agent.remainingDistance;
     }
 
     private IEnumerator Attack(float fireRate)
@@ -47,6 +57,8 @@ public class NavScriptArrive : MonoBehaviour {
         while (true)
         {
             yield return new WaitForSeconds(fireRate);
+            if (!enemyHealth.GetDead())
+                anim.Play("Attack1");
             if (gameObject.tag == "Melee")
                 GameData._Instance.Health -= 2;
             if (gameObject.tag == "Range")

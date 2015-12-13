@@ -10,22 +10,31 @@ public class EnemyHealth : MonoBehaviour {
         Range = 2
     }
 
+    public GameObject animObject;
+    public Animation anim;
+
     private EnemyType type;
     private int health;
+    private bool dead = false;
+    private NavScriptArrive navScript;
 
     void Awake()
     {
         CheckType();
+        anim = animObject.GetComponent<Animation>();
+        navScript = GetComponentInParent<NavScriptArrive>();
     }
 
     void Update()
     {
-
-        if (health <= 0)
+        if (health <= 0 && !dead)
         {
             GameData._Instance.Coins += (int)type;
             GameData._Instance.Score += (int)type;
-            Destroy(transform.parent.gameObject);
+            dead = true;
+            anim.Play("Death", PlayMode.StopSameLayer);
+            navScript.agent.Stop();
+            Destroy(transform.parent.gameObject, anim.GetClip("Death").length);
         }
     }
 
@@ -53,6 +62,11 @@ public class EnemyHealth : MonoBehaviour {
         {
             health -= 1;
         }
+    }
+
+    public bool GetDead()
+    {
+        return dead;
     }
 
     private void CheckType()
